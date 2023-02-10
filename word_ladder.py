@@ -36,14 +36,14 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     dict_list = open(dictionary_file).read().split()
     stack = []
     stack.append(start_word)
+    if len(start_word) != len(end_word):
+        return None
     dict_list.remove(start_word)
     q = deque([])
     q.append(stack)
 
     if start_word == end_word:
         return [start_word]
-    if len(start_word) != len(end_word):
-        return None
 
     while len(q) != 0:
         topstack = q.popleft()
