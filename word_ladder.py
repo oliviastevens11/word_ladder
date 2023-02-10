@@ -18,45 +18,47 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     ```
     may give the output
     ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
+    ['stone', 'shone', 'phone', 'phony', 'peony',
+    'penny', 'benny', 'bonny', 'boney', 'money']
     ```
     but the possible outputs are not unique,
     so you may also get the output
     ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
+    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots',
+    'hooty', 'hooey', 'honey', 'money']
     ```
     (We cannot use doctests here because the outputs are not unique.)
 
     Whenever it is impossible to generate a word ladder between the two words,
     the function returns `None`.
     '''
-    
+
     dict_list = open(dictionary_file).read().split()
     stack = []
     stack.append(start_word)
     dict_list.remove(start_word)
     q = deque([])
     q.append(stack)
-    
+
     if start_word == end_word:
         return [start_word]
     if len(start_word) != len(end_word):
         return None
 
-    while len(q) !=  0:
+    while len(q) != 0:
         topstack = q.popleft()
         copydict = copy.copy(dict_list)
         for word in copydict:
             if _adjacent(word, topstack[-1]):
-                if word == end_word: 
+                if word == end_word:
                     topstack.append(word)
-                    return topstack 
+                    return topstack
                 stack_c = copy.copy(topstack)
                 stack_c.append(word)
                 q.append(stack_c)
                 dict_list.remove(word)
     return None
-    
+
 
 def verify_word_ladder(ladder):
     '''
@@ -100,5 +102,3 @@ def _adjacent(word1, word2):
             return True
         else:
             return False
-
-
